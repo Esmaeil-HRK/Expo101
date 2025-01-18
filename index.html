@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المعرض الهندسي 101 | EXPO 101</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --accent-orange: #fb923c;
+            --accent-green: #15803d;
+            --accent-red: #ef4444;
+            --accent-purple: #7e22ce;
+        }
+
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f9fa; /* Updated background color */
+        }
+
+        .geometric-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="10" width="20" height="5" fill="%231e3a8a" opacity="0.07"/><rect x="60" y="60" width="5" height="20" fill="%23ef4444" opacity="0.07"/><rect x="40" y="40" width="15" height="5" fill="%2315803d" opacity="0.07"/></svg>');
+            opacity: 0.4; /* Increased opacity */
+            z-index: -1;
+        }
+
+        .department-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+            border-radius: 1rem; /* Added border-radius */
+        }
+
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Enhanced box-shadow */
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, var(--primary-blue), #2563eb);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Added box-shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+        }
+
+        .countdown-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Enhanced box-shadow */
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Added box-shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1); /* Enhanced box-shadow */
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            height: 50px; /* Reduced logo size */
+        }
+
+        .navbar-links a {
+            font-weight: 600;
+            color: #4a5568;
+            margin-left: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Hero section styling */
+        .hero {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 3rem; /* Reduced title size */
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem; /* Reduced subtitle size */
+            margin-bottom: 2rem;
+        }
+
+        /* Section styling */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.25rem; /* Reduced title size */
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+        }
+
+        .btn:hover {
+            background-color: #f58020;
+            transform: translateY(-2px); /* Added hover effect */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #4a5568;
+            color: #ffffff;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Social icons styling */
+        .social-icons a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Updated timeline styling */
+        .timeline-line {
+            position: absolute;
+            height: 95%;
+            width: 4px;
+            background-color: var(--primary-blue);
+            right: calc(25px - 2px);
+        }
+
+        @media (min-width: 768px) {
+            .timeline-line {
+                right: calc(50% - 2px);
+            }
+        }
+
+        .timeline-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            font-weight: bold;
+            box-shadow: 0 0 0 4px white; /* Added white outline */
+        }
+
+        @media (min-width: 768px) {
+            .timeline-number {
+                right: calc(50% - 20px);
+            }
+        }
+
+        .timeline-card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content {
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .timeline-content ul {
+            list-style: disc;
+            padding-right: 1.5rem;
+        }
+
+        .timeline-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content ul ul {
+            list-style: circle;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Section -->
+    <header class="relative overflow-hidden bg-white shadow-lg">
+        <div class="geometric-pattern"></div>
+        <div class="container mx-auto px-4 py-6">
+            <nav class="flex justify-between items-center">
+                <img src="path-to-logo.png" alt="EXPO 101" class="h-16">
+                <div class="flex gap-4">
+                    <a href="#about" class="text-gray-700 hover:text-blue-600">من نحن</a>
+                    <a href="#departments" class="text-gray-700 hover:text-blue-600">الأقسام</a>
+                    <a href="#schedule" class="text-gray-700 hover:text-blue-600">الأجندة</a>
+                    <a href="#location" class="text-gray-700 hover:text-blue-600">المكان</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600">تواصل معنا</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-blue-900 text-white py-20">
+        <div class="geometric-pattern opacity-20"></div>
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-6">المعرض الهندسي 101</h1>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-2xl mb-8">انطلاق الحدث الهندسي الأبرز في بنغازي!</p>
+            </div>
+            <div class="grid grid-cols-4 gap-4 max-w-2xl mx-auto" id="countdown" dir="ltr">
+                <!-- Countdown will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">من نحن؟</h2>
+            <div class="prose lg:prose-xl mx-auto">
+                <p class="text-lg text-gray-700 leading-relaxed text-right">
+                    نحن طلاب كلية الهندسة بجامعة بنغازي، نسعى لتنظيم معرض هندسي طلابي بمنتصف
+                    فبراير لعام 2025، والذي سيضم مشاريع إبداعية و أوراق علمية وابتكارات من سبع أقسام
+                    هندسية.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section id="departments" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">الأقسام المشاركة</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Department cards will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 class="text-4xl font-bold text-blue-600">+5000</h3>
+                    <p class="text-gray-600">زائر متوقع</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-4xl font-bold text-green-600">+150</h3>
+                    <p class="text-gray-600">مشروع</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-4xl font-bold text-orange-600">+350</h3>
+                    <p class="text-gray-600">طالب مشارك</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <<!-- Schedule Section -->
+<section id="schedule" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">ماذا ينتظرك؟</h2>
+        <div class="relative max-w-4xl mx-auto">
+            <!-- Timeline Line -->
+            <div class="timeline-line"></div>
+
+            <!-- Day 1 -->
+            <div class="flex flex-col md:flex-row items-start justify-end mb-8 last:mb-0">
+                <div class="timeline-number" style="background-color: var(--primary-blue);">1</div>
+                <div class="w-full md:w-5/12">
+                    <div class="timeline-card">
+                        <div class="timeline-date" style="color: var(--primary-blue);">15 فبراير</div>
+                        <h3 class="timeline-title" style="color: var(--primary-blue);">اليوم الأول</h3>
+                        <div class="timeline-content">
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>جلسات تعريفية حول دور المهندس في سوق العمل الليبي</li>
+                                <li>لقاءات مع خبراء حول المهارات المطلوبة لبناء مسار مهني ناجح</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="flex flex-col md:flex-row-reverse items-start justify-end mb-8 last:mb-0">
+                <div class="timeline-number" style="background-color: var(--accent-green);">2</div>
+                <div class="w-full md:w-5/12">
+                    <div class="timeline-card">
+                        <div class="timeline-date" style="color: var(--accent-green);">16 فبراير</div>
+                        <h3 class="timeline-title" style="color: var(--accent-green);">اليوم الثاني</h3>
+                        <div class="timeline-content">
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>برنامج تعريفي خاص بالطلبة الجدد والمقبلين على التخصص في كلية الهندسة</li>
+                                <li>جولة لاستكشاف أقسام الكلية وفرص العمل في كل مجال</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 3-4 -->
+            <div class="flex flex-col md:flex-row items-start justify-end mb-8 last:mb-0">
+                <div class="timeline-number" style="background-color: var(--accent-orange);">3-4</div>
+                <div class="w-full md:w-5/12">
+                    <div class="timeline-card">
+                        <div class="timeline-date" style="color: var(--accent-orange);">18-19 فبراير</div>
+                        <h3 class="timeline-title" style="color: var(--accent-orange);">اليومان الثالث والرابع</h3>
+                        <div class="timeline-content">
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>
+                                    معرض المشاريع الطلابية:
+                                    <ul class="list-circle list-inside pr-6 mt-2 space-y-1">
+                                        <li>نماذج هندسية مبتكرة</li>
+                                        <li>تجارب عملية مشوقة</li>
+                                        <li>بوسترات علمية بأفكار إبداعية</li>
+                                    </ul>
+                                </li>
+                                <li>ورش عمل ومسابقات تفاعلية</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="flex flex-col md:flex-row-reverse items-start justify-end mb-8 last:mb-0">
+                <div class="timeline-number" style="background-color: var(--accent-purple);">5</div>
+                <div class="w-full md:w-5/12">
+                    <div class="timeline-card">
+                        <div class="timeline-date" style="color: var(--accent-purple);">20 فبراير</div>
+                        <h3 class="timeline-title" style="color: var(--accent-purple);">اليوم الأخير</h3>
+                        <div class="timeline-content">
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>منصة التوظيف: فرصة للتواصل مع كبرى الشركات وفتح آفاق مهنية جديدة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">مكان المعرض</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <iframe src="https://www.google.com/maps/place/Expo+Libya+-+%D8%A3%D8%B1%D8%B6+%D9%85%D8%B9%D8%A7%D8%B1%D8%B6+%D8%A7%D9%83%D8%B3%D8%A8%D9%88+%D9%84%D9%8A%D8%A8%D9%8A%D8%A7%E2%80%AD/@32.2216134,20.1693079,789m/data=!3m2!1e3!4b1!4m6!3m5!1s0x1382fd004ea65c8b:0xd98cca449b5c5b54!8m2!3d32.2216134!4d20.1693079!16s%2Fg%2F11w2fq6h2j?entry=ttu&g_ep=EgoyMDI1MDExNS4wIKXMDSoASAFQAw%3D%3D"></iframe>
+                </div>
+                <div class="text-center md:text-right">
+                    <h3 class="text-2xl font-bold mb-4">Expo Libya - أرض معارض اكسبو ليبيا</h3>
+                    <p class="text-lg text-gray-700 mb-4">الكويفية، بنغازي</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">الجهات الداعمة</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-center">
+                <!-- Placeholder for facility logos -->
+                <div class="flex justify-center items-center h-32">
+                    <div class="w-40 h-20 bg-gray-300 rounded-md"></div>
+                </div>
+                <div class="flex justify-center items-center h-32">
+                    <div class="w-40 h-20 bg-gray-300 rounded-md"></div>
+                </div>
+                <div class="flex justify-center items-center h-32">
+                    <div class="w-40 h-20 bg-gray-300 rounded-md"></div>
+                </div>
+                <div class="flex justify-center items-center h-32">
+                    <div class="w-40 h-20 bg-gray-300 rounded-md"></div>
+                </div>
+                <div class="flex justify-center items-center h-32">
+                    <div class="w-40 h-20 bg-gray-300 rounded-md"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">تواصل معنا</h2>
+            <div class="flex justify-center gap-8 mb-8">
+                <a href="mailto:Engineering.Expo.101@gmail.com" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline">
+                    <i class="fas fa-envelope text-xl"></i>
+                    Engineering.Expo.101@gmail.com
+                </a>
+                <a href="tel:+218926987109" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline">
+                    <i class="fas fa-phone-alt text-xl"></i>
+                    92-6987109 +218
+                </a>
+            </div>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="text-blue-600 hover:text-blue-800 hover:underline"><i class="fab fa-facebook-f text-2xl"></i></a>
+                <a href="#" class="text-blue-600 hover:text-blue-800 hover:underline"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" class="text-blue-600 hover:text-blue-800 hover:underline"><i class="fab fa-twitter text-2xl"></i></a>
+            </div>
+        </div>
+    </section>
+    
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const eventDate = new Date('2025-02-15T09:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `
+                <div class="countdown-item">
+                    <span class="text-4xl font-bold">${days}</span>
+                    <span class="block text-sm">يوم</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="text-4xl font-bold">${hours}</span>
+                    <span class="block text-sm">ساعة</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="text-4xl font-bold">${minutes}</span>
+                    <span class="block text-sm">دقيقة</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="text-4xl font-bold">${seconds}</span>
+                    <span class="block text-sm">ثانية</span>
+                </div>
+            `;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Department Cards
+        const departments = [
+            { name: 'الهندسة المعمارية', color: 'teal' },
+            { name: 'الهندسة الكيميائية', color: 'red' },
+            { name: 'الهندسة المدنية', color: 'pink' },
+            { name: 'الهندسة الكهربائية', color: 'blue' },
+            { name: 'الهندسة الصناعية', color: 'yellow' },
+            { name: 'الهندسة الميكانيكية', color: 'orange' },
+            { name: 'هندسة النفط', color: 'purple' }
+        ];
+
+        // Generate department cards
+        const departmentsContainer = document.querySelector('#departments .grid');
+        departments.forEach(dept => {
+            const card = document.createElement('div');
+            card.className = `department-card bg-white p-6 rounded-lg shadow-lg border-t-4 border-${dept.color}-500`;
+            card.innerHTML = `
+                <h3 class="text-xl font-bold mb-2">${dept.name}</h3>
+                <p class="text-gray-600">اكتشف المشاريع والابتكارات</p>
+            `;
+            departmentsContainer.appendChild(card);
+        });
+    </script>
+</body>
+</html>
