@@ -296,9 +296,9 @@
     <!-- Header Section -->
     <header class="relative overflow-hidden bg-white shadow-lg">
         <div class="geometric-pattern"></div>
-        <div class="container mx-auto px-4 py-6">
+        <div class="container mx-auto px-3 py-5">
             <nav class="flex justify-between items-center">
-                <img src="Logo-01.png" alt="EXPO 101" class="h-10">
+                <img src="Logo-01.png" alt="EXPO 101" class="h-8">
                 <div class="flex gap-4">
                     <a href="#about" class="text-gray-700 hover:text-blue-600">من نحن</a>
                     <a href="#departments" class="text-gray-700 hover:text-blue-600">الأقسام</a>
@@ -353,18 +353,22 @@
         <div class="container mx-auto px-4">
             <div class="stats-grid">
                 <div class="stat-card">
+                    <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
                     <h3 class="text-4xl font-bold text-blue-600">+5000</h3>
                     <p class="text-gray-600">زائر متوقع</p>
                 </div>
                 <div class="stat-card">
+                    <i class="fas fa-diagram-project text-4xl text-green-600 mb-4"></i>
                     <h3 class="text-4xl font-bold text-green-600">+150</h3>
                     <p class="text-gray-600">مشروع</p>
                 </div>
                 <div class="stat-card">
+                    <i class="fas fa-graduation-cap text-4xl text-yellow-600 mb-4"></i>
                     <h3 class="text-4xl font-bold text-yellow-600">+350</h3>
                     <p class="text-gray-600">طالب مشارك</p>
                 </div>
                 <div class="stat-card">
+                    <i class="fas fa-chalkboard-user text-4xl text-red-600 mb-4"></i>
                     <h3 class="text-4xl font-bold text-red-600">+20</h3>
                     <p class="text-gray-600">ورشة عمل</p>
                 </div>
@@ -568,13 +572,48 @@
 
         // Department Cards
         const departments = [
-            { name: 'الهندسة المعمارية', color: 'green' },
-            { name: 'الهندسة الكيميائية', color: 'red' },
-            { name: 'الهندسة المدنية', color: 'pink' },
-            { name: 'الهندسة الكهربائية', color: 'blue' },
-            { name: 'الهندسة الصناعية', color: 'yellow' },
-            { name: 'الهندسة الميكانيكية', color: 'gray' },
-            { name: 'الهندسة النفطية', color: 'purple' }
+            { 
+            name: 'الهندسة المعمارية', 
+            color: 'green', 
+            icon: 'fa-building', 
+            desc: 'تصميم المباني والتخطيط العمراني.' 
+            },
+            { 
+            name: 'الهندسة الكيميائية', 
+            color: 'red', 
+            icon: 'fa-flask', 
+            desc: 'ابتكارات في الصناعات الكيميائية.' 
+            },
+            { 
+            name: 'الهندسة المدنية', 
+            color: 'pink', 
+            icon: 'fa-hard-hat', 
+            desc: 'بناء الجسور والطرق والتشييد.' 
+            },
+            { 
+            name: 'الهندسة الكهربائية', 
+            color: 'blue', 
+            icon: 'fa-bolt', 
+            desc: 'تحكم ذكي وحلول كهربائية متطورة.' 
+            },
+            { 
+            name: 'الهندسة الصناعية', 
+            color: 'yellow', 
+            icon: 'fa-industry', 
+            desc: 'تحسين العمليات والأنظمة الإنتاجية.' 
+            },
+            { 
+            name: 'الهندسة الميكانيكية', 
+            color: 'gray', 
+            icon: 'fa-cogs', 
+            desc: 'تصميم الآلات وتطوير نظم الحركة.' 
+            },
+            { 
+            name: 'الهندسة النفطية', 
+            color: 'purple', 
+            icon: 'fa-oil-can', 
+            desc: 'استكشاف واستخراج الموارد البترولية.' 
+            }
         ];
 
         // Generate department cards
@@ -583,8 +622,12 @@
             const card = document.createElement('div');
             card.className = `department-card p-6 rounded-lg shadow-lg border-t-4 border-${dept.color}-500`;
             card.innerHTML = `
-                <h3 class="text-xl font-bold mb-2">${dept.name}</h3>
-                <p class="text-gray-600">اكتشف المشاريع والابتكارات</p>
+            <div class="flex items-center mb-2">
+                <i class="fas ${dept.icon} text-${dept.color}-500 text-4xl mr-2 ml-2"></i>
+                <h3 class="text-xl font-bold">${dept.name}</h3>
+            </div>
+            <p class="text-gray-600 mb-2">${dept.desc}</p>
+            <p class="text-gray-500">اكتشف المشاريع والابتكارات</p>
             `;
             departmentsContainer.appendChild(card);
         });
