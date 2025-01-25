@@ -313,6 +313,19 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
+            flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+        }
+
+        .countdown-item {
+            flex: 1 1 100px; /* Allow flexibility and set a minimum width */
+            max-width: 150px; /* Limit maximum width */
+        }
+
+        @media (max-width: 640px) {
+            .countdown-item {
+                max-width: 100%;
+                margin: 0.5rem 0; /* Adjust margin for vertical layout */
+            }
         }
 
     </style>
