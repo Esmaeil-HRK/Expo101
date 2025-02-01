@@ -337,7 +337,7 @@
         <div class="geometric-pattern"></div>
         <div class="container mx-auto px-3 py-5">
             <nav class="flex justify-between items-center">
-                <img src="Logo-01.png" alt="EXPO 101" class="h-8 ml-4">
+                <img src="Logo-03.png" alt="EXPO 101" class="h-16 ml-4">
                 <div class="flex gap-4">
                     <a href="#about" class="text-gray-700 hover:text-blue-600">من نحن</a>
                     <a href="#departments" class="text-gray-700 hover:text-blue-600">الأقسام</a>
@@ -353,9 +353,9 @@
     <section class="relative bg-gradient-to-r from-blue-700 to-purple-500 text-white py-24 transition-all duration-500 ease-in-out">
         <div class="geometric-pattern opacity-30 animate-pulse"></div>
         <div class="container mx-auto px-4 text-center">
-            <img src="Logo-03.png" alt="EXPO 101"
+            <img src="Logo-06.png" alt="UOB Logo"
                  class="h-48 mx-auto mb-6 transition-transform duration-300 hover:scale-105 hover:rotate-3">
-            <h1 class="text-6xl font-extrabold mb-6 drop-shadow-lg">المعرض الهندسي 101</h1>
+            <!-- <h1 class="text-5xl font-extrabold mb-6 drop-shadow-lg">المعرض الهندسي 101</h1> -->
             <div class="max-w-3xl mx-auto">
                 <p class="text-2xl mb-8">انطلاق الحدث الهندسي الأبرز في بنغازي!</p>
             </div>
@@ -396,22 +396,22 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-blue-600">+5000</h3>
+                    <h3 class="text-4xl font-bold text-blue-600">5000+</h3>
                     <p class="text-gray-600">زائر متوقع</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-diagram-project text-4xl text-green-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-green-600">+150</h3>
+                    <h3 class="text-4xl font-bold text-green-600">150+</h3>
                     <p class="text-gray-600">مشروع</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-graduation-cap text-4xl text-yellow-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-yellow-600">+350</h3>
+                    <h3 class="text-4xl font-bold text-yellow-600">350+</h3>
                     <p class="text-gray-600">طالب مشارك</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-chalkboard-user text-4xl text-red-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-red-600">+20</h3>
+                    <h3 class="text-4xl font-bold text-red-600">20+</h3>
                     <p class="text-gray-600">ورشة عمل</p>
                 </div>
             </div>
@@ -677,8 +677,36 @@
             departmentsContainer.appendChild(card);
         });
 
-        
-    </script>
-</body>
+        // Animate statistics numbers
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            element.innerHTML = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+            window.requestAnimationFrame(step);
+            } else {
+            element.innerHTML += '+'; // Add plus sign when the final number is reached
+            }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const stats = [
+            { selector: '.stat-card:nth-child(1) h3', end: 5000 },
+            { selector: '.stat-card:nth-child(2) h3', end: 150 },
+            { selector: '.stat-card:nth-child(3) h3', end: 350 },
+            { selector: '.stat-card:nth-child(4) h3', end: 20 }
+            ];
+
+            stats.forEach(stat => {
+            const element = document.querySelector(stat.selector);
+            animateValue(element, 0, stat.end, 5000); // Increased duration to 4000ms
+            });
+        });
+        </script>
+    </body>
 
 </html>
