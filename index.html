@@ -343,6 +343,26 @@
             scroll-behavior: smooth;
         }
 
+        .hamburger-icon line {
+    transition: all 0.3s ease;
+}
+
+.hamburger-icon.open #top {
+    rotate: 45deg;
+    transform: rotateY('angle');
+    transform-origin: left;
+}
+
+.hamburger-icon.open #mid {
+    opacity: 0;
+}
+
+.hamburger-icon.open #bottom {
+    rotate: -45deg;
+    transform: translate(-3px, -2px);
+    transform-origin: center;
+}
+
     </style>
 </head>
 
@@ -355,9 +375,9 @@
                 <img src="Logo-03.png" alt="EXPO 101" class="h-16 ml-4">
                 <span class="ham cursor-pointer md:hidden">
                     <!-- Hamburger icon -->
-                    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line id="top" x1="3" y1="12" x2="21" y2="12"></line>
-                        <line id="mid" x1="3" y1="6" x2="21" y2="6"></line>
+                    <svg class="hamburger-icon transition-all duration-700 ease-in-out" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line id="mid" x1="3" y1="12" x2="21" y2="12"></line>
+                        <line id="top" x1="3" y1="6" x2="21" y2="6"></line>
                         <line id="bottom" x1="3" y1="18" x2="21" y2="18"></line>
                     </svg>
                     <!-- X icon -->
@@ -729,30 +749,8 @@
         }
 
         document.querySelector('.hamburger-icon').addEventListener('click', () => {
-            // document.querySelector('.hamburger-icon').classList.add('hidden');
-            // document.querySelector('.close-icon').classList.remove('hidden');
-            // <line x1="18" y1="6" x2="6" y2="18"></line>
-            // <line x1="6" y1="6" x2="18" y2="18"></line>
-
-            document.querySelector('#top').setAttribute('x1', '18');
-            document.querySelector('#top').setAttribute('x2', '6');
-            document.querySelector('#top').setAttribute('y1', '6');
-            document.querySelector('#top').setAttribute('y2', '18');
-
-            document.querySelector('#mid').classList.add('hidden');
-
-            document.querySelector('#bottom').setAttribute('x1', '6');
-            document.querySelector('#bottom').setAttribute('x2', '18');
-            document.querySelector('#bottom').setAttribute('y1', '6');
-            document.querySelector('#bottom').setAttribute('y2', '18');
-
-            document.querySelector('.header').classList.add('open');
-        });
-
-        document.querySelector('.close-icon').addEventListener('click', () => {
-            document.querySelector('.close-icon').classList.add('hidden');
-            document.querySelector('.hamburger-icon').classList.remove('hidden');
-            document.querySelector('.header').classList.remove('open');
+            document.querySelector('.header').classList.toggle('open');
+            document.querySelector('.hamburger-icon').classList.toggle('open');
         });
 
         document.addEventListener('DOMContentLoaded', () => {
