@@ -354,7 +354,19 @@
         <div class="header container flex flex-col mx-auto px-3 py-5 animate">
             <nav class="flex justify-between items-center mb-5">
                 <img src="Logo-03.png" alt="EXPO 101" class="h-16 ml-4">
-                <span class="ham cursor-pointer md:hidden" >X</span>
+                <span class="ham cursor-pointer md:hidden">
+                    <!-- Hamburger icon -->
+                    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                    <!-- X icon -->
+                    <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </span>
                 <div class="flex gap-4 hidden md:flex navbar-links">
                     <a href="#about" class="text-gray-700 hover:text-blue-600">من نحن</a>
                     <a href="#departments" class="text-gray-700 hover:text-blue-600">الأقسام</a>
@@ -717,8 +729,16 @@
             window.requestAnimationFrame(step);
         }
 
-        document.querySelector('.ham').addEventListener('click', () => {
-            document.querySelector('.header').classList.toggle('open');
+        document.querySelector('.hamburger-icon').addEventListener('click', () => {
+            document.querySelector('.hamburger-icon').classList.add('hidden');
+            document.querySelector('.close-icon').classList.remove('hidden');
+            document.querySelector('.header').classList.add('open');
+        });
+
+        document.querySelector('.close-icon').addEventListener('click', () => {
+            document.querySelector('.close-icon').classList.add('hidden');
+            document.querySelector('.hamburger-icon').classList.remove('hidden');
+            document.querySelector('.header').classList.remove('open');
         });
 
         document.addEventListener('DOMContentLoaded', () => {
