@@ -84,6 +84,8 @@
             text-align: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .stat-card:hover {
@@ -321,11 +323,25 @@
             max-width: 150px; /* Limit maximum width */
         }
 
+        .header {
+            max-height: 104px;
+            transition: all ease-in-out 1s;
+            overflow: hidden;
+        }
+
+        .header.open {
+            min-height: 320px;
+        }
+
         @media (max-width: 640px) {
             .countdown-item {
                 max-width: 100%;
                 margin: 0.5rem 0; /* Adjust margin for vertical layout */
             }
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
     </style>
@@ -335,10 +351,11 @@
     <!-- Header Section -->
     <header class="relative overflow-hidden bg-white shadow-lg">
         <div class="geometric-pattern"></div>
-        <div class="container mx-auto px-3 py-5">
-            <nav class="flex justify-between items-center">
+        <div class="header container flex flex-col mx-auto px-3 py-5 animate">
+            <nav class="flex justify-between items-center mb-5">
                 <img src="Logo-03.png" alt="EXPO 101" class="h-16 ml-4">
-                <div class="flex gap-4">
+                <span class="ham cursor-pointer md:hidden" >X</span>
+                <div class="flex gap-4 hidden md:flex navbar-links">
                     <a href="#about" class="text-gray-700 hover:text-blue-600">من نحن</a>
                     <a href="#departments" class="text-gray-700 hover:text-blue-600">الأقسام</a>
                     <a href="#schedule" class="text-gray-700 hover:text-blue-600">الأجندة</a>
@@ -346,6 +363,13 @@
                     <a href="#contact" class="text-gray-700 hover:text-blue-600">تواصل معنا</a>
                 </div>
             </nav>
+            <div class="flex flex-col items-center gap-4">
+                <a href="#about" class="text-gray-700 hover:text-blue-600">من نحن</a>
+                <a href="#departments" class="text-gray-700 hover:text-blue-600">الأقسام</a>
+                <a href="#schedule" class="text-gray-700 hover:text-blue-600">الأجندة</a>
+                <a href="#location" class="text-gray-700 hover:text-blue-600">المكان</a>
+                <a href="#contact" class="text-gray-700 hover:text-blue-600">تواصل معنا</a>
+            </div>
         </div>
     </header>
 
@@ -396,22 +420,22 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-blue-600">5000+</h3>
+                    <div class="flex justify-center text-4xl font-bold text-blue-600" ><h3 >5000</h3>+</div>
                     <p class="text-gray-600">زائر متوقع</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-diagram-project text-4xl text-green-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-green-600">150+</h3>
+                    <div class="flex justify-center text-4xl font-bold text-green-600" ><h3 >150</h3>+</div>
                     <p class="text-gray-600">مشروع</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-graduation-cap text-4xl text-yellow-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-yellow-600">350+</h3>
+                    <div class="flex justify-center text-4xl font-bold text-yellow-600" ><h3 >350</h3>+</div>
                     <p class="text-gray-600">طالب مشارك</p>
                 </div>
                 <div class="stat-card">
                     <i class="fas fa-chalkboard-user text-4xl text-red-600 mb-4"></i>
-                    <h3 class="text-4xl font-bold text-red-600">20+</h3>
+                    <div class="flex justify-center text-4xl font-bold text-red-600" ><h3 >20</h3>+</div>
                     <p class="text-gray-600">ورشة عمل</p>
                 </div>
             </div>
@@ -687,11 +711,15 @@
             if (progress < 1) {
             window.requestAnimationFrame(step);
             } else {
-            element.innerHTML += '+'; // Add plus sign when the final number is reached
+            element.innerHTML += ''; // Add plus sign when the final number is reached
             }
             };
             window.requestAnimationFrame(step);
         }
+
+        document.querySelector('.ham').addEventListener('click', () => {
+            document.querySelector('.header').classList.toggle('open');
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const stats = [
