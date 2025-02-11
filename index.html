@@ -325,12 +325,11 @@
 
         .header {
             max-height: 104px;
-            transition: all ease-in-out 1s;
             overflow: hidden;
         }
 
         .header.open {
-            min-height: 320px;
+            max-height: 320px;
         }
 
         @media (max-width: 640px) {
@@ -349,17 +348,17 @@
 
 <body class="bg-gray-50">
     <!-- Header Section -->
-    <header class="relative overflow-hidden bg-white shadow-lg">
+    <header class=" relative overflow-hidden bg-white shadow-lg">
         <div class="geometric-pattern"></div>
-        <div class="header container flex flex-col mx-auto px-3 py-5 animate">
+        <div class="header transition-all duration-700 ease-in-out container flex flex-col mx-auto px-3 py-5 animate">
             <nav class="flex justify-between items-center mb-5">
                 <img src="Logo-03.png" alt="EXPO 101" class="h-16 ml-4">
                 <span class="ham cursor-pointer md:hidden">
                     <!-- Hamburger icon -->
                     <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                        <line id="top" x1="3" y1="12" x2="21" y2="12"></line>
+                        <line id="mid" x1="3" y1="6" x2="21" y2="6"></line>
+                        <line id="bottom" x1="3" y1="18" x2="21" y2="18"></line>
                     </svg>
                     <!-- X icon -->
                     <svg class="close-icon hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -730,8 +729,23 @@
         }
 
         document.querySelector('.hamburger-icon').addEventListener('click', () => {
-            document.querySelector('.hamburger-icon').classList.add('hidden');
-            document.querySelector('.close-icon').classList.remove('hidden');
+            // document.querySelector('.hamburger-icon').classList.add('hidden');
+            // document.querySelector('.close-icon').classList.remove('hidden');
+            // <line x1="18" y1="6" x2="6" y2="18"></line>
+            // <line x1="6" y1="6" x2="18" y2="18"></line>
+
+            document.querySelector('#top').setAttribute('x1', '18');
+            document.querySelector('#top').setAttribute('x2', '6');
+            document.querySelector('#top').setAttribute('y1', '6');
+            document.querySelector('#top').setAttribute('y2', '18');
+
+            document.querySelector('#mid').classList.add('hidden');
+
+            document.querySelector('#bottom').setAttribute('x1', '6');
+            document.querySelector('#bottom').setAttribute('x2', '18');
+            document.querySelector('#bottom').setAttribute('y1', '6');
+            document.querySelector('#bottom').setAttribute('y2', '18');
+
             document.querySelector('.header').classList.add('open');
         });
 
