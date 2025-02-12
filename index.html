@@ -445,7 +445,7 @@
     </section>
 
     <!-- Statistics Section -->
-    <section class="py-16">
+    <section id="scrollArea" class="py-16">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12">إحصائيات المعرض</h2>
             <div class="stats-grid">
@@ -636,6 +636,29 @@
     </footer>
 
     <script>
+        const options = {
+  root: document.querySelector("#scrollArea"),
+  rootMargin: "0px",
+  threshold: 0.2,
+};
+
+const intersectionCallback = (entries) => {
+  entries.forEach((entry) => {
+    console.log(entry);
+    if (entry.isIntersecting) {
+        console.log('test3');
+        
+      let elem = entry.target;
+
+      if (entry.intersectionRatio >= 0.75) {
+        intersectionCounter++;
+      }
+    }
+  });
+};
+const observer = new IntersectionObserver(intersectionCallback, options);
+const target = document.querySelector("#scrollArea");
+observer.observe(target);
         // Countdown Timer
         function updateCountdown() {
             const eventDate = new Date('2025-02-15T09:00:00').getTime();
