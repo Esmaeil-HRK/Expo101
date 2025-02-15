@@ -416,6 +416,7 @@
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-2xl mx-auto" id="countdown" dir="ltr">
                 <!-- Countdown will be inserted here by JavaScript -->
+
             </div>
         </div>
     </section>
@@ -660,10 +661,48 @@ const observer = new IntersectionObserver(intersectionCallback, options);
 const target = document.querySelector("#scrollArea");
 observer.observe(target);
         // Countdown Timer
-        function updateCountdown() {
+        // function updateCountdown() {
+        //     const eventDate = new Date('2025-02-15T09:00:00').getTime();
+        //     const now = new Date().getTime();
+        //     const distance = eventDate - now;
+
+        //     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        //     document.getElementById('countdown').innerHTML = `
+        //         <div class="countdown-item">
+        //             <span class="text-4xl font-bold">${days}</span>
+        //             <span class="block text-sm">يوم</span>
+        //         </div>
+        //         <div class="countdown-item">
+        //             <span class="text-4xl font-bold">${hours}</span>
+        //             <span class="block text-sm">ساعة</span>
+        //         </div>
+        //         <div class="countdown-item">
+        //             <span class="text-4xl font-bold">${minutes}</span>
+        //             <span class="block text-sm">دقيقة</span>
+        //         </div>
+        //         <div class="countdown-item">
+        //             <span class="text-4xl font-bold">${seconds}</span>
+        //             <span class="block text-sm">ثانية</span>
+        //         </div>
+        //     `;
+        // }
+
+        // setInterval(updateCountdown, 1000);
+        // updateCountdown();
+
+                // Countdown Timer
+                function updateCountdown() {
             const eventDate = new Date('2025-02-15T09:00:00').getTime();
             const now = new Date().getTime();
-            const distance = eventDate - now;
+            let distance = eventDate - now;
+
+            if (distance < 0) {
+                distance = 0; // Ensure distance is not negative
+            }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -688,9 +727,13 @@ observer.observe(target);
                     <span class="block text-sm">ثانية</span>
                 </div>
             `;
+
+            if (distance <= 0) {
+                clearInterval(countdownInterval); // Stop the countdown when the event starts
+            }
         }
 
-        setInterval(updateCountdown, 1000);
+        const countdownInterval = setInterval(updateCountdown, 1000); // Store the interval ID
         updateCountdown();
 
         // Department Cards
